@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ItemService } from './item.service';
-import { Item } from './entities/item.entity';
+import { Item } from './models/item.model';
 import { CreateItemInput } from './dto/create-item.input';
 import { UpdateItemInput } from './dto/update-item.input';
 
@@ -13,7 +13,7 @@ export class ItemResolver {
     return this.itemService.create(createItemInput);
   }
 
-  @Query(() => [Item], { name: 'item' })
+  @Query(() => [Item], { name: 'items' })
   findAll() {
     return this.itemService.findAll();
   }
@@ -25,7 +25,7 @@ export class ItemResolver {
 
   @Mutation(() => Item)
   updateItem(@Args('updateItemInput') updateItemInput: UpdateItemInput) {
-    return this.itemService.update(updateItemInput.id, updateItemInput);
+    return this.itemService.update(updateItemInput);
   }
 
   @Mutation(() => Item)
