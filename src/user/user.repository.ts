@@ -55,7 +55,6 @@ export class UserRepository {
 
             const sql = `UPDATE users SET ? WHERE id = ?`
             const result: ResultSetHeader = await this.ds.query(sql, [updateData, id])
-            console.log("update result", result)
             return result.changedRows
         } catch (e) {
             console.log("DB User 저장 에러 발생 ", e)
@@ -68,13 +67,10 @@ export class UserRepository {
             const sql = `DELETE FROM users WHERE id = ?`
 
             const result: ResultSetHeader = await this.ds.query(sql, [id])
-            console.log("update result", result)
-
             return result.affectedRows
         } catch (e) {
             console.log("DB User 삭제 에러 발생 ", e)
             throw new ConflictException(`DB User 정보 삭제 에러 발생`)
-
         }
     }
 }
