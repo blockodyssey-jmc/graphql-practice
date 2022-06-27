@@ -4,6 +4,7 @@ import { ItemResolver } from './item.resolver';
 import { ItemRepository } from './item.repository';
 
 @Module({
-  providers: [ItemResolver, ItemService, ItemRepository]
+  providers: [ItemResolver, ItemService, ItemRepository],
+  exports: [ItemRepository]
 })
-export class ItemModule {}
+export class ItemModule { }
