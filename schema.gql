@@ -3,13 +3,12 @@
 # ------------------------------------------------------
 
 type Item {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
+  """primary Key"""
+  id: Int!
 
-type Order {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """name index"""
+  name: String!
+  desc: String!
 }
 
 type User {
@@ -23,8 +22,27 @@ type User {
   email: String!
 }
 
+type Order {
+  """primary Key"""
+  id: Int!
+
+  """item"""
+  item: Item!
+
+  """user"""
+  user: User!
+  orderDate: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
+  items: [Item!]!
   item(id: Int!): Item!
+  orders: [Order!]!
   order(id: Int!): Order!
   searchUsers: [User!]!
   user(id: Int!): User!
@@ -35,33 +53,25 @@ type Mutation {
   updateItem(updateItemInput: UpdateItemInput!): Item!
   removeItem(id: Int!): Item!
   createOrder(createOrderInput: CreateOrderInput!): Order!
-  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
-  removeOrder(id: Int!): Order!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
 }
 
 input CreateItemInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  desc: String!
 }
 
 input UpdateItemInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  desc: String
   id: Int!
 }
 
 input CreateOrderInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateOrderInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  itemId: Int!
+  userId: Int!
 }
 
 input CreateUserInput {
